@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-MAINTAINER chendureddy1999@gmail.com
+MAINTAINER rajeshaachari343gmail.com
 RUN apt-get update 
 RUN apt-get -y install apache2 
 RUN apt-get install unzip
