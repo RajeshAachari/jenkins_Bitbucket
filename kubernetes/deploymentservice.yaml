@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodeserver
-        image: ranjana000/newimg:latest
+        image: rajeshaachari/newimg:latest
         ports:
         - containerPort: 3000
 
