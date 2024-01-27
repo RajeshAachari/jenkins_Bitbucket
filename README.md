@@ -1,1 +1,1 @@
-# DevopsEnabler
+# EZ Solutions
