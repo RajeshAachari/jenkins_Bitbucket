@@ -36,21 +36,21 @@ pipeline{
             steps{
                 sh '''
                     echo "taggig image"
-                    docker image tag newapp:latest chendureddy/newapp:latest
+                    docker image tag newapp:latest rajeshaachari/newapp:latest
                     '''
             }
         }
         stage('image_push'){
             steps{
                 sh '''
-                    docker login -u chendureddy -p Chendu@9009
-                    docker image push chendureddy/newapp:latest
+                    docker login -u rajeshaachari -p Rajesh@343
+                    docker image push rajeshaachari/newapp:latest
                     '''
             }
         }
         stage('TRIVY'){
             steps{
-                sh " trivy image  chendureddy/newapp:latest "
+                sh " trivy image  rajeshaachari/newapp:latest "
 
             }
         }
@@ -58,7 +58,7 @@ pipeline{
             steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name Server -p 9000:90 chendureddy/newapp:latest bash
+                    docker container run -d --name Server -p 9000:80 rajeshaachari/newapp:latest bash
                     '''
             }
         }
