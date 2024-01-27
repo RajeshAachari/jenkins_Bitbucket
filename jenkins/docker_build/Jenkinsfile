@@ -1,0 +1,47 @@
+pipeline{
+    agent any
+    environment {
+        PATH = "$PATH:/usr/share/maven"
+    }
+    stages{
+        stage('Compile'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('image_build'){
+            steps{
+                sh '''
+                    echo "buildinng image"
+                    docker image build -t myapp ${WORKSPACE}/docker
+                    '''
+            }
+        }
+
+        stage('image_tagging'){
+            steps{
+                sh '''
+                    echo "taggig image"
+                    docker image tag myapp:latest chendureddy/myapp:latest
+                    '''
+            }
+        }
+        stage('image_push'){
+            steps{
+                sh '''
+                    docker login -u chendureddy -p Chendu@9009
+                    docker image push chendureddy/myapp:latest
+                    '''
+            }
+        }
+         stage('deploy'){
+            steps{
+                sh '''
+                    echo "creating container..."
+                    docker container run -d --name Server01 -p 9002:80 chendureddy/myapp:latest bash
+                    '''
+            }
+        }
+    }
+}
