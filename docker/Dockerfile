@@ -12,29 +12,16 @@
 # EXPOSE 80
  
  
- FROM  centos:latest
- MAINTAINER rajeshaachari343@gmail.com
- RUN yum install -y httpd \
-  zip\
-  unzip
- ADD https://www.free-css.com/assets/files/free-css-templates/download/page265/shine.zip /var/www/html/
- WORKDIR /var/www/html/
- RUN unzip shine.zip
- RUN cp -rvf shine/* .
- RUN rm -rf shine shine.zip
- CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
- EXPOSE 80   
+ 
+ FROM node:latest
 
+ WORKDIR /usr/src/app
 
-# FROM node:latest
+ COPY package.json ./
 
-# WORKDIR /usr/src/app
+ RUN npm install
 
-# COPY package.json ./
+ COPY . .
 
-# RUN npm install
-
-# COPY . .
-
-# EXPOSE 4000
-# CMD [ "node", "index.js" ]
+ EXPOSE 4000
+ CMD [ "node", "index.js" ]
