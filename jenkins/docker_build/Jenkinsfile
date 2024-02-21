@@ -39,7 +39,7 @@ pipeline{
             steps{
                 sh '''
                     echo "creating container..."
-                    docker container run -d --name c1 -p 9000:80 rajeshaachari/myapp:latest bash
+                    docker container run -d --name c2 -p 9001:80 rajeshaachari/myapp:latest bash
                     '''
             }
         }
